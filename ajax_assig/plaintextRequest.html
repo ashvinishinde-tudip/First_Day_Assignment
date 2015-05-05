@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+	<html>
+		<body>
+			<h3>AJAX Call</h3>
+		
+			<div>
+		
+				<h5 id="myHeader">Click here to get response</h5>
+		
+				<input type="button" value="Click Me!" onclick="getText('welcome.txt')" />
+		
+			</div>
+		
+		<script type="text/javascript">
+				//Prepare the global variable for the request
+		
+		var myRequest;
+		
+		//Write the getText(url) function
+		
+		function getText(url)
+		
+		{
+		
+		//check support for the XMLHttpRequest object
+		
+		if (window.XMLHttpRequest)
+		
+		{
+		
+		myRequest = new XMLHttpRequest();
+		
+		}
+		
+		//else, create an ActiveXObject for IE6
+		
+		else
+		
+		{
+		
+		myRequest = new ActiveXObject("Microsoft.XMLHTTP");
+		
+		}
+		
+		//Call the open() method to make the request
+		
+		myRequest.open("GET", url, true);
+		
+		//Send the request
+		
+		myRequest.send(null);
+		
+		//Assign the getData() function to the
+		
+		//onreadystatechange property to handle server response
+		
+		myRequest.onreadystatechange = getData;
+		
+		}
+		
+		
+		
+		/**********************************************/
+		
+		
+		
+		//This function handles the server response
+		
+		function getData()
+		
+		{
+		
+		//Get a reference to the header element where
+		
+		//the returned result will be displayed
+		
+		var myHeader = document.getElementById("myHeader");
+		
+		//Check the response is complete
+		
+		if (myRequest.readyState ===4)
+		
+		{
+		
+		//Check the status code of the response is successful
+		
+		if (myRequest.status === 200)
+		
+		{
+		
+		//Store the response
+		
+		var text = myRequest.responseText;
+		
+		//Assing the returned text to the nodeValue
+		
+		//property of the header element (you can also use
+		
+		//innerHTML here if you feel it simplifies your task)
+		
+		myHeader.firstChild.nodeValue = text;
+		
+		}
+		
+		}
+		
+		}
+		
+		
+		
+		</script>
+			
+		</body>
+	</html>
