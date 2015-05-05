@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function loadXMLDoc()
+{
+var xmlhttp;
+var temp=document.getElementById("query").value;
+//alert(temp);
+xmlhttp=new XMLHttpRequest();
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","http://api.dataweave.in/v1/price_intelligence/findProduct/?api_key=b20a79e582ee4953ceccf41ac28aa08d&product="+temp+"&page=1&per_page=10",true);
+xmlhttp.send();
+}
+</script>
+</head>
+<body>
+
+<div id="myDiv"><h2>Just click here and get what u want...</h2></div>
+<input type="text" id="query"></input>
+<button type="button" onclick="loadXMLDoc()">SEARCH</button>
+
+</body>
+</html>
